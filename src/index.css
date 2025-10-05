@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background-dark: #101622;
+    --card-dark: #1A2E28;
+    --primary-green: #34d399;
+  }
+
+  body {
+    background-color: #f6f6f8;
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .dark body {
+    background-color: var(--background-dark);
+    background-image: radial-gradient(circle at 50% 50%, hsl(215, 28%, 10%), var(--background-dark) 70%);
+  }
+
+  .dark body {
+    background-image: radial-gradient(circle at 50% 70%, hsl(210, 20%, 12%), var(--background-dark) 50%);
+  }
+}
+
+@layer utilities {
+  .glow-button {
+    box-shadow: 0 0 20px 0 rgba(52, 211, 153, 0.4);
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(0.95);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes timer-breath {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes breathing {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.4);
+    }
+    50% {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px rgba(52, 211, 153, 0.6);
+    }
+  }
+
+  .animate-breathing {
+    animation: breathing 3s ease-in-out infinite;
+  }
+
+  /* Accessibility: Focus rings */
+  *:focus-visible {
+    outline: 2px solid var(--primary-green);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
+    outline: 3px solid var(--primary-green);
+    outline-offset: 3px;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    
+    .animate-breathing {
+      animation: none !important;
+      transform: scale(1) !important;
+    }
+    
+    .animate-pulse-slow {
+      animation: none !important;
+    }
+  }
+}
